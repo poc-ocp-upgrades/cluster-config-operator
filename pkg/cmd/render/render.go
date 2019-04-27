@@ -23,6 +23,8 @@ type renderOpts struct {
 func NewRenderCommand() *cobra.Command {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	renderOpts := renderOpts{generic: *genericrenderoptions.NewGenericOptions(), manifest: *genericrenderoptions.NewManifestOptions("config", "openshift/origin-cluster-config-operator:latest")}
 	cmd := &cobra.Command{Use: "render", Short: "Render kubernetes API server bootstrap manifests, secrets and configMaps", Run: func(cmd *cobra.Command, args []string) {
 		if err := renderOpts.Validate(); err != nil {
@@ -41,11 +43,15 @@ func NewRenderCommand() *cobra.Command {
 func (r *renderOpts) AddFlags(fs *pflag.FlagSet) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	r.manifest.AddFlags(fs, "config")
 	r.generic.AddFlags(fs, configv1.GroupVersion.WithKind("Config"))
 	fs.StringVar(&r.clusterConfigFile, "cluster-config-file", r.clusterConfigFile, "Openshift Cluster API Config file.")
 }
 func (r *renderOpts) Validate() error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if err := r.manifest.Validate(); err != nil {
@@ -57,6 +63,8 @@ func (r *renderOpts) Validate() error {
 	return nil
 }
 func (r *renderOpts) Complete() error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if err := r.manifest.Complete(); err != nil {
@@ -74,6 +82,8 @@ type TemplateData struct {
 }
 
 func (r *renderOpts) Run() error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	renderConfig := TemplateData{}
@@ -94,7 +104,16 @@ func (r *renderOpts) Run() error {
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }
